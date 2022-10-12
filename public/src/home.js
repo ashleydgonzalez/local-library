@@ -70,35 +70,38 @@ function getMostPopularBooksHelper(books = []) {
 }
 
 function getMostPopularBooks(books = []) {
-  //with the helper function, the books are already sorted from most popular to least popular.
-  books = getMostPopularBooksHelper(books);
-  //declaring a result variable to hold the top 5 books and map the bookObj's we are looking for. 
-  let result = books.slice(0, 5).map((bookObj) => {
-    //returning the books and count in the format for which the assignment is asking.
-    return { name: bookObj.title, count: bookObj.borrows.length };
-  });
-  //return the result to get this function complete.
-  return result;
+  //declared an empty array to hold the books.
+  let result = [];
+  //declared popBooks to hold the information that was gathered during reduce
+  //held a total and bookObj during the reduce array method.
+  let popBooks = books.reduce((total, bookObj) => {
+    //destructured borrows to = bookObj
+      let { borrows } = bookObj;
+      total = borrows.length;
+    //push the result with the name of bookObj.title, count: total
+      result.push({ name: bookObj.title, count: total});
+    //return the total  of borrows.length;
+      return total;
+    });
+    //sort through the resultObjA and resultObjB in descending order.
+    result.sort((resultObjA, resultObjB) => {
+        return resultObjB.count - resultObjA.count;//return in descending order from most popular to least
+      });
+      return result.slice(0, 5);//return top 5
 }
 
 //********Previous code before I realized I needed a helper function*******
-// let result = [];
-// let popBooks = books.reduce((total, bookObj) => {
-//
-//   let { borrows } = bookObj;
-//   total = borrows.length;
-//
-//   result.push({ name: bookObj.title, count: total});
-//
-//   return total;
-// });
-//
-// result.sort((resultObjA,resultObjB) => {
-//   return resultObjB.count - resultObjA.count;
-// });
-// return result.slice(0, 5);
-
-
+    
+    // //with the helper function, the books are already sorted from most popular to least popular.
+    // books = getMostPopularBooksHelper(books);
+    // //declaring a result variable to hold the top 5 books and map the bookObj's we are looking for. 
+    // let result = books.slice(0, 5).map((bookObj) => {
+    //   //returning the books and count in the format for which the assignment is asking.
+    //   return { name: bookObj.title, count: bookObj.borrows.length };
+    // });
+    // //return the result to get this function complete.
+    // return result;
+    
 
 
 function getMostPopularAuthors(books = [], authors = []) {
