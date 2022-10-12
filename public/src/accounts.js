@@ -1,5 +1,5 @@
 function findAccountById(accounts, id) {
-  //declared a new variable to hold the findings of the accounts information.
+  //declared a new variable to hold the findings of the accounts information..
   let result = accounts.find((accountObj) => {
     //return the results if the accountObj.id matches the id. 
     return accountObj.id === id;
